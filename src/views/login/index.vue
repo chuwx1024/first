@@ -4,24 +4,65 @@
       <div class="login-title">
         <img src="../../assets/img/logo_index.png" alt="">
       </div>
-      <el-form>
-        <el-form-item>
-          <el-input v-model="input" placeholder="请输入手机号"></el-input>
+      <el-form  :model="LoginForm" :rules="Loginrules">
+        <el-form-item prop="mobile">
+          <el-input v-model="LoginForm.mobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-input style="width: 260px" v-model="input" placeholder="请输入验证码"></el-input>
+        <el-form-item  prop="code">
+          <el-input style="width: 260px" v-model="LoginForm.code" placeholder="请输入验证码"></el-input>
           <el-button style="float: right; width: 120px" plain>发送验证码</el-button>
         </el-form-item>
-        <el-form-item>
-          <el-checkbox>请认真阅读并同意用户协议和隐私条款</el-checkbox>
+        <el-form-item prop="checked">
+          <el-checkbox v-model="LoginForm.checked">请认真阅读并同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
-        <el-from-item>
-          <el-button style="width: 100%" type="primary">登录</el-button>
-        </el-from-item>
+        <el-form-item >
+          <el-button style="width: 100%" type="primary" @click='Login'>登录</el-button>
+        </el-form-item>
       </el-form>
     </el-card>
   </div>
 </template>
+
+<script>
+
+export default {
+  data () {
+    return {
+      LoginForm: {
+        mobile: '',
+        code: '',
+        checked: false
+      },
+      Loginrules: {
+        mobile: [
+          { required: true, message: '请输入您的手机号', trigger: 'blur' },
+          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' },
+          { pattern: /^\d{6}$/, message: '请输入数字', trigger: 'blur' }
+        ],
+        checked: [{
+          validator: function (rule, value, callback) {
+            if (value) {
+              callback()
+            } else {
+              callback(new Error('请先确认'))
+            }
+          }
+        }]
+      }
+    }
+  },
+  methods: {
+    Login () {
+      // console.log(this.$refs)
+    }
+
+  }
+}
+
+</script>
 
 <style scoped lang="less">
 .login {

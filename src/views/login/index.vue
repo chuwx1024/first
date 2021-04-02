@@ -4,7 +4,7 @@
       <div class="login-title">
         <img src="../../assets/img/logo_index.png" alt="">
       </div>
-      <el-form  :model="LoginForm" :rules="Loginrules">
+      <el-form  :model="LoginForm" :rules="Loginrules" ref="LoginForm">
         <el-form-item prop="mobile">
           <el-input v-model="LoginForm.mobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
@@ -16,7 +16,7 @@
           <el-checkbox v-model="LoginForm.checked">请认真阅读并同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
         <el-form-item >
-          <el-button style="width: 100%" type="primary" @click='Login'>登录</el-button>
+          <el-button style="width: 100%" type="primary" @click='Login("LoginForm")'>登录</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -57,6 +57,14 @@ export default {
   methods: {
     Login () {
       // console.log(this.$refs)
+      this.$refs.LoginForm.validate((formdata) => {
+        if (formdata) {
+          alert('登录蔡成功')
+        } else {
+          console.log('登录失败')
+          return false
+        }
+      })
     }
 
   }

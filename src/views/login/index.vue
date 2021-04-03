@@ -59,7 +59,14 @@ export default {
       // console.log(this.$refs)
       this.$refs.LoginForm.validate((formdata) => {
         if (formdata) {
-          alert('登录蔡成功')
+          console.log(this.LoginForm)
+          this.$axios({
+            url: '/authorizations',
+            data: this.LoginForm,
+            method: 'post'
+          }).then(result => {
+            console.log(result)
+          })
         } else {
           console.log('登录失败')
           return false

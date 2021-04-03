@@ -29,7 +29,9 @@
         </el-menu>
       </el-aside>
       <el-container>
-        <el-header>头部</el-header>
+        <el-header>
+          <LayoutHeader></LayoutHeader>
+        </el-header>
         <el-main>
           333
           <router-view></router-view>
@@ -40,9 +42,13 @@
 </template>
 
 <script>
+import LayoutHeader from '../../components/layout-header'
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    LayoutHeader
+  }
 }
 </script>
 

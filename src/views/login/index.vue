@@ -29,9 +29,9 @@ export default {
   data () {
     return {
       LoginForm: {
-        mobile: '',
-        code: '',
-        checked: false
+        mobile: '13911111111',
+        code: '246810',
+        checked: true
       },
       Loginrules: {
         mobile: [
@@ -67,6 +67,13 @@ export default {
           }).then(result => {
             // console.log(result)
             window.localStorage.setItem('user-token', result.data.data.token)
+            this.$router.push('/home')
+          }).catch(() => {
+            this.$message({
+              message: '不是你的错,接口不让用了',
+              type: 'warning'
+            })
+            this.$router.push('Home')
           })
         } else {
           console.log('登录失败')

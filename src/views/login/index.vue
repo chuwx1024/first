@@ -65,7 +65,8 @@ export default {
             data: this.LoginForm,
             method: 'post'
           }).then(result => {
-            console.log(result)
+            // console.log(result)
+            window.localStorage.setItem('user-token', result.data.data.token)
           })
         } else {
           console.log('登录失败')

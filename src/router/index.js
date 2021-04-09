@@ -13,9 +13,29 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: '/',
+        path: '/home',
         name: 'Home',
         component: Home
+      },
+      {
+        path: '/publish',
+        name: 'Publish',
+        component: () => import('@/views/detail/publish')
+      },
+      {
+        path: '/article',
+        name: 'Article',
+        component: () => import('@/views/detail/article')
+      },
+      {
+        path: '/comment',
+        name: 'Comment',
+        component: () => import('@/views/detail/comment')
+      },
+      {
+        path: '/material',
+        name: 'Material',
+        component: () => import('@/views/detail/material')
       }
     ]
   },

@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     Login () {
-      // console.log(this.$refs)
       this.$refs.LoginForm.validate((formdata) => {
         if (formdata) {
           console.log(this.LoginForm)
@@ -65,15 +64,15 @@ export default {
             data: this.LoginForm,
             method: 'post'
           }).then(result => {
-            // console.log(result)
+            console.log(result)
             window.localStorage.setItem('user-token', result.data.data.token)
-            this.$router.push('/home')
+            this.$router.push('/')
           }).catch(() => {
             this.$message({
               message: '不是你的错,接口不让用了',
               type: 'warning'
             })
-            this.$router.push('Home')
+            this.$router.push('/')
           })
         } else {
           console.log('登录失败')

@@ -50,5 +50,20 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+// 路由拦截器 每个页面都要先经过这里
+router.beforeEach((to, from, next) => {
+  // 1. 先判断是不是登录页面
+  if (to.path === '/login') {
+    next()
+    return
+  }
+  // 2. 如果不是登录页面
+  const token = window.localStorage.getItem('user-token')
+  if (token) {
+    next()
+  } else {
+    next('/login')
+  }
+})
 
 export default router

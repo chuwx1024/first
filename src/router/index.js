@@ -57,6 +57,7 @@ router.beforeEach((to, from, next) => {
 
   // 1. 先判断是不是登录页面
   if (to.path === '/login') {
+    Nprogress.done()
     next()
     return
   }
@@ -65,6 +66,7 @@ router.beforeEach((to, from, next) => {
   if (token) {
     next()
   } else {
+    Nprogress.done()
     next('/login')
   }
 })

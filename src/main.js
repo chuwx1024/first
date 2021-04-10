@@ -8,6 +8,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './styles/index.less'
 // import axios
 import axios from 'axios'
+//  import nprogress
+import 'nprogress/nprogress.css'
 
 // 全局注册
 Vue.prototype.$axios = axios

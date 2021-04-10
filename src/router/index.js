@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/login'
 import Layout from '@/views/layout'
 import Home from '@/views/home'
+import Nprogress from 'nprogress'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,8 @@ const router = new VueRouter({
 })
 // 路由拦截器 每个页面都要先经过这里
 router.beforeEach((to, from, next) => {
+  Nprogress.start()
+
   // 1. 先判断是不是登录页面
   if (to.path === '/login') {
     next()
@@ -64,6 +67,10 @@ router.beforeEach((to, from, next) => {
   } else {
     next('/login')
   }
+})
+
+router.afterEach((to, from, next) => {
+  Nprogress.done()
 })
 
 export default router

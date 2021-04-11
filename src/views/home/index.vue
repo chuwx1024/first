@@ -72,6 +72,7 @@
 
 <script>
 export default {
+  name: 'Article',
   data () {
     return {
       filterForm: {

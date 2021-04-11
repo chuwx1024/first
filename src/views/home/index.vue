@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <el-card>
+    <el-card class="firstCard">
       <div slot="header" class="clearfix">
         <span>全部图文</span>
       </div>
@@ -36,6 +36,37 @@
         </el-form>
       </div>
     </el-card>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>共找到? 条符合条件的内容</span>
+      </div>
+      <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+          prop="date"
+          label="封面"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="标题"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="状态">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="发布日期">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="操作">
+        </el-table-column>
+      </el-table>
+    </el-card>
   </div>
 </template>
 
@@ -49,8 +80,42 @@ export default {
         begin_pudate: '',
         end_pubdate: ''
       },
-      rangedate: ''
+      rangedate: '',
+      tableData: [{
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      },
+      {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1517 弄'
+      },
+      {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1519 弄'
+      },
+      {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄'
+      }]
     }
+  },
+  created () {
+    const token = window.localStorage.getItem('user-token')
+    this.$axios({
+      method: 'get',
+      url: '/articles',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
 }
@@ -62,5 +127,8 @@ export default {
 }
 .el-button {
   margin-left: 68px;
+}
+.firstCard {
+  margin-bottom: 14px;
 }
 </style>

@@ -13,6 +13,7 @@ import 'nprogress/nprogress.css'
 
 // 全局注册
 Vue.prototype.$axios = axios
+axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

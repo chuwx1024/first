@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     Login () {
-      var key = { token: '我有一头xiaomaolv' }
+      var key = { token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDMyODQzNjYsInVzZXJfaWQiOjF9.mLYitrKsn4E4KdQd0CNPugKrH8uQmXEQTlG_JutC8jU' }
       this.$refs.LoginForm.validate((formdata) => {
         if (formdata) {
           console.log(this.LoginForm)
@@ -66,11 +66,11 @@ export default {
             method: 'post'
           }).then(result => {
             // window.localStorage.setItem('user-token', result.data.data.token)
-            window.localStorage.setItem('user-token', JSON.stringify(key))
+            window.localStorage.setItem('user-token', JSON.stringify(key.token))
             this.$router.push('/')
           }).catch(() => {
             // 假数据
-            window.localStorage.setItem('user-token', JSON.stringify(key))
+            window.localStorage.setItem('user-token', JSON.stringify(key.token))
             this.$message({
               message: '不是你的错,接口不让用了',
               type: 'warning'

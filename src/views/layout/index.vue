@@ -35,7 +35,4 @@ export default {
   height: 100vh;
   overflow: hidden;
 }
-.el-main {
-  background: #ccc;
-}
 </style>

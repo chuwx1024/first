@@ -66,6 +66,7 @@ router.beforeEach((to, from, next) => {
   if (token) {
     next()
   } else {
+    // 如果在登录页面,token为false 访问内部网页,需要关掉nprogress
     Nprogress.done()
     next('/login')
   }

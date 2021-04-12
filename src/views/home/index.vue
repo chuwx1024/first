@@ -80,6 +80,10 @@
         <el-table-column
           prop="address"
           label="操作">
+          <template>
+            <el-button style="marginLeft: 0;marginRight: 20px" type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+          </template>
         </el-table-column>
       </el-table>
     </el-card>

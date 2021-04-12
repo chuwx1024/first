@@ -49,8 +49,8 @@
           label="封面"
           width="180">
           <template slot-scope="scope">
-            <img :src="scope.row.cover.images[0]" alt="">  
-          </template>  
+            <img :src="scope.row.cover.images[0]" alt="">
+          </template>
         </el-table-column>
         <el-table-column
           prop="title"
@@ -93,7 +93,7 @@ export default {
         },
         id: 1195253183874596900,
         pubdate: '2019-11-15 16:12:20',
-        status: 2,
+        status: 0,
         title: '我是公主'
       }]
     }
@@ -101,13 +101,50 @@ export default {
   created () {
     this.fakeArticles()
     this.loadArticles()
-
   },
   methods: {
     fakeArticles () {
       for (var i = 0; i < 10; i++) {
-        this.Articles.push(this.Articles[0])
-        console.log(this.Articles)
+        const num = i % 5
+        const obj = this.Articles[0]
+        // if (num === 0) {
+        //   obj.status = 0
+        //   this.Articles.push(JSON.parse(JSON.stringify(obj)))
+        // } else if (num === 1) {
+        //   obj.status = 1
+        //   this.Articles.push(JSON.parse(JSON.stringify(obj)))
+        // } else if (num === 2) {
+        //   obj.status = 2
+        //   this.Articles.push(JSON.parse(JSON.stringify(obj)))
+        // } else if (num === 3) {
+        //   obj.status = 3
+        //   this.Articles.push(JSON.parse(JSON.stringify(obj)))
+        // } else {
+        //   obj.status = 4
+        //   this.Articles.push(JSON.parse(JSON.stringify(obj)))
+        // }
+        switch (num) {
+          case 0:
+            obj.status = 0
+            this.Articles.push(JSON.parse(JSON.stringify(obj)))
+            break
+          case 1:
+            obj.status = 1
+            this.Articles.push(JSON.parse(JSON.stringify(obj)))
+            break
+          case 2:
+            obj.status = 2
+            this.Articles.push(JSON.parse(JSON.stringify(obj)))
+            break
+          case 3:
+            obj.status = 3
+            this.Articles.push(JSON.parse(JSON.stringify(obj)))
+            break
+          case 4:
+            obj.status = 4
+            this.Articles.push(JSON.parse(JSON.stringify(obj)))
+            break
+        }
       }
     },
     loadArticles () {
@@ -123,7 +160,6 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-
     }
   }
 

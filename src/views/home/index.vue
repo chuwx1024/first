@@ -61,11 +61,12 @@
           prop="status"
           label="状态">
           <template slot-scope="scope">
-            <span v-show="scope.row.status === 0">草稿</span>
+            <!-- <span v-show="scope.row.status === 0">草稿</span>
             <span v-show="scope.row.status === 1">待审核</span>
             <span v-show="scope.row.status === 2">审核通过</span>
             <span v-show="scope.row.status === 3">审核失败</span>
-            <span v-show="scope.row.status === 4">已删除</span>
+            <span v-show="scope.row.status === 4">已删除</span> -->
+            <span>{{ ArticlesStatus[scope.row.status].value }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -102,7 +103,29 @@ export default {
         pubdate: '2019-11-15 16:12:20',
         status: 0,
         title: '我是公主'
-      }]
+      }],
+      ArticlesStatus: [
+        {
+          tape: 0,
+          value: '草稿'
+        },
+        {
+          tape: 1,
+          value: '待审核'
+        },
+        {
+          tape: 2,
+          value: '审核通过'
+        },
+        {
+          tape: 3,
+          value: '审核失败'
+        },
+        {
+          tape: 4,
+          value: '已删除'
+        }
+      ]
     }
   },
   created () {

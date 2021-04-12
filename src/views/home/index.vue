@@ -60,6 +60,13 @@
         <el-table-column
           prop="status"
           label="状态">
+          <template slot-scope="scope">
+            <span v-show="scope.row.status === 0">草稿</span>
+            <span v-show="scope.row.status === 1">待审核</span>
+            <span v-show="scope.row.status === 2">审核通过</span>
+            <span v-show="scope.row.status === 3">审核失败</span>
+            <span v-show="scope.row.status === 4">已删除</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="pubdate"

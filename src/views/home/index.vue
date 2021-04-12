@@ -66,7 +66,11 @@
             <span v-show="scope.row.status === 2">审核通过</span>
             <span v-show="scope.row.status === 3">审核失败</span>
             <span v-show="scope.row.status === 4">已删除</span> -->
-            <span>{{ ArticlesStatus[scope.row.status].value }}</span>
+            <!-- <span>{{ ArticlesStatus[scope.row.status].value }}</span>
+             -->
+            <el-tag
+              :type="ArticlesStatus[scope.row.status].tape"
+            >{{ ArticlesStatus[scope.row.status].value }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column
@@ -106,23 +110,23 @@ export default {
       }],
       ArticlesStatus: [
         {
-          tape: 0,
+          tape: '',
           value: '草稿'
         },
         {
-          tape: 1,
+          tape: 'info',
           value: '待审核'
         },
         {
-          tape: 2,
+          tape: 'success',
           value: '审核通过'
         },
         {
-          tape: 3,
+          tape: 'warning',
           value: '审核失败'
         },
         {
-          tape: 4,
+          tape: 'danger',
           value: '已删除'
         }
       ]

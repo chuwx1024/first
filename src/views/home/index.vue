@@ -38,7 +38,7 @@
     </el-card>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>共找到? 条符合条件的内容</span>
+        <span>共找到{{ totalCount }}条符合条件的内容</span>
       </div>
       <el-table
         :data="Articles"
@@ -81,12 +81,20 @@
           prop="address"
           label="操作">
           <template>
-            <el-button style="marginLeft: 0;marginRight: 20px" type="primary" icon="el-icon-edit" circle></el-button>
-            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+            <el-button style="color: #409eff;marginLeft: 0" type="text">编辑</el-button>
+            <el-button type="text" style="color: #f56c6c">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
+    <div class="pagination">
+      <el-pagination
+       @current-change= "onPageChange"
+        background
+        layout="prev, pager, next"
+        :total="1000">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -133,16 +141,17 @@ export default {
           tape: 'danger',
           value: '已删除'
         }
-      ]
+      ],
+      totalCount: 100
     }
   },
   created () {
     this.fakeArticles()
-    this.loadArticles()
+    this.loadArticles(1)
   },
   methods: {
     fakeArticles () {
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 100; i++) {
         const num = i % 5
         const obj = this.Articles[0]
         // if (num === 0) {
@@ -185,19 +194,29 @@ export default {
         }
       }
     },
-    loadArticles () {
+    loadArticles (page = 1) {
       const token = window.localStorage.getItem('user-token')
       this.$axios({
         method: 'get',
         url: '/articles',
         headers: {
           Authorization: `Bearer ${token}`
+        },
+        params: {
+          page,
+          per_page: 10 // 默认10tiao
         }
       }).then(res => {
         console.log(res)
+        this.Articles = res.data.data.results
+        this.totalCount = res.data.data.total_count
       }).catch(err => {
         console.log(err)
+        console.log(page)
       })
+    },
+    onPageChange (page) {
+      this.loadArticles(page)
     }
   }
 
@@ -211,10 +230,14 @@ export default {
 .el-button {
   margin-left: 68px;
 }
-.firstCard {
-  margin-bottom: 14px;
+.box-card {
+  margin-bottom: 20px;
+  margin-top: 14px;
 }
 img {
   width: 50%;
+}
+.pagination {
+  text-align: center;
 }
 </style>

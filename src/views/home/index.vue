@@ -8,11 +8,12 @@
         <el-form  v-model="filterForm">
           <el-form-item label="文章状态">
             <el-radio-group v-model="filterForm.status" >
-              <el-radio label="全部"></el-radio>
-              <el-radio label="草稿"></el-radio>
-              <el-radio label="待审核"></el-radio>
-              <el-radio label="审核通过"></el-radio>
-              <el-radio label="审核失败"></el-radio>
+              <el-radio :label='null'>全部</el-radio>
+              <el-radio label="0">草稿</el-radio>
+              <el-radio label="1">待审核</el-radio>
+              <el-radio label="2">审核通过</el-radio>
+              <el-radio label="3">审核失败</el-radio>
+              <el-radio label="4">已删除</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="频道列表">
@@ -31,7 +32,7 @@
             </el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary">立即创建</el-button>
+            <el-button type="primary" @click='loadArticles(1)'>立即创建</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -209,7 +210,11 @@ export default {
         },
         params: {
           page,
-          per_page: 10 // 默认10tiao
+          per_page: 10, // 默认10tiao
+          status: this.filterForm.status
+          // channel_id,
+          // begin_pudate,
+          // end_pubdate,
         }
       }).then(res => {
         console.log(res)

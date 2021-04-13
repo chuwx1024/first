@@ -92,6 +92,7 @@
       <el-pagination
        @current-change= "onPageChange"
         background
+        :disabled="loading"
         layout="prev, pager, next"
         :total="1000">
       </el-pagination>

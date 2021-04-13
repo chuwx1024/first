@@ -18,8 +18,11 @@
           </el-form-item>
           <el-form-item label="频道列表">
             <el-select v-model="filterForm.channer_id"  placeholder="请选择活动区域">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+              <el-option
+                :label="item.name"
+                v-for="item in channels"
+                :key='item.id'
+                :value="item.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="事件选择">
@@ -107,7 +110,7 @@ export default {
   data () {
     return {
       filterForm: {
-        status: '',
+        status: null,
         channel_id: '',
         begin_pudate: '',
         end_pubdate: ''
@@ -146,12 +149,14 @@ export default {
         }
       ],
       totalCount: 100,
-      loading: ''
+      loading: '',
+      channels: []
     }
   },
   created () {
     this.fakeArticles()
     this.loadArticles(1)
+    this.onloadChannels()
   },
   methods: {
     fakeArticles () {
@@ -229,6 +234,16 @@ export default {
     },
     onPageChange (page) {
       this.loadArticles(page)
+    },
+    onloadChannels () {
+      this.$axios({
+        method: 'get',
+        url: '/channels'
+      }).then(res => {
+        this.channels = res.data.data.channels
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }

@@ -42,6 +42,7 @@
       </div>
       <el-table
         :data="Articles"
+        v-loading="loading"
         style="width: 100%">
         <!-- table 只能渲染文本,渲染其他的,需要自定义---- -->
         <el-table-column
@@ -142,7 +143,8 @@ export default {
           value: '已删除'
         }
       ],
-      totalCount: 100
+      totalCount: 100,
+      loading: ''
     }
   },
   created () {
@@ -151,7 +153,7 @@ export default {
   },
   methods: {
     fakeArticles () {
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 10; i++) {
         const num = i % 5
         const obj = this.Articles[0]
         // if (num === 0) {
@@ -195,6 +197,8 @@ export default {
       }
     },
     loadArticles (page = 1) {
+      // 开始加载loading
+      this.loading = true
       const token = window.localStorage.getItem('user-token')
       this.$axios({
         method: 'get',
@@ -213,13 +217,14 @@ export default {
       }).catch(err => {
         console.log(err)
         console.log(page)
+      }).finally(() => {
+        this.loading = false
       })
     },
     onPageChange (page) {
       this.loadArticles(page)
     }
   }
-
 }
 </script>
 
@@ -235,7 +240,7 @@ export default {
   margin-top: 14px;
 }
 img {
-  width: 50%;
+  width: 30%;
 }
 .pagination {
   text-align: center;

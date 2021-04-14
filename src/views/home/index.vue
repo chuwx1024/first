@@ -252,7 +252,7 @@ export default {
       })
     },
     onDeleteArticle (id) {
-      // console.log(id)
+      // 通过Number.Max_SAFE_INTEGER 查询js中最大的安全整数,现在id 已经超出最大范围
       this.$axios({
         method: 'DELETE',
         url: `/articles/${id}`,

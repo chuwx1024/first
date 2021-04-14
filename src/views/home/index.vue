@@ -17,7 +17,8 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="频道列表">
-            <el-select v-model="filterForm.channer_id"  placeholder="请选择活动区域">
+            <el-select v-model="filterForm.channel_id" >
+              <el-option  label='所有频道' :value="null"></el-option>
               <el-option
                 :label="item.name"
                 v-for="item in channels"
@@ -29,6 +30,7 @@
             <el-date-picker
               v-model="rangedate"
               type="daterange"
+              value-format="yyyy-MM-dd"
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期">
@@ -111,11 +113,11 @@ export default {
     return {
       filterForm: {
         status: null,
-        channel_id: '',
-        begin_pudate: '',
-        end_pubdate: ''
+        channel_id: null
+        // begin_pudate: '',
+        // end_pubdate: ''
       },
-      rangedate: '',
+      rangedate: [],
       Articles: [{
         cover: {
           images: ['https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11302429824%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620730162&t=13f8214d3399138b38704af7b2d260de'],
@@ -216,10 +218,10 @@ export default {
         params: {
           page,
           per_page: 10, // 默认10tiao
-          status: this.filterForm.status
-          // channel_id,
-          // begin_pudate,
-          // end_pubdate,
+          status: this.filterForm.status,
+          channel_id: this.filterForm.channel_id, // 不传后面的值就是所有
+          begin_pudate: this.rangedate ? this.rangedate[0] : null, // 日期删除后变为null
+          end_pubdate: this.rangedate ? this.rangedate[1] : null // null 没有下标,会报错
         }
       }).then(res => {
         console.log(res)

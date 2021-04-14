@@ -37,7 +37,7 @@
             </el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click='loadArticles(1)'>立即创建</el-button>
+            <el-button type="primary" @click='loadArticles(1)'>查询</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -87,9 +87,11 @@
         <el-table-column
           prop="address"
           label="操作">
-          <template>
+          <template slot-scope="scope">
             <el-button style="color: #409eff;marginLeft: 0" type="text">编辑</el-button>
-            <el-button type="text" style="color: #f56c6c">删除</el-button>
+            <el-button
+              @click='onDeleteArticle(scope.row.id)'
+             type="text" style="color: #f56c6c">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -114,8 +116,6 @@ export default {
       filterForm: {
         status: null,
         channel_id: null
-        // begin_pudate: '',
-        // end_pubdate: ''
       },
       rangedate: [],
       Articles: [{
@@ -184,22 +184,27 @@ export default {
         switch (num) {
           case 0:
             obj.status = 0
+            obj.id++
             this.Articles.push(JSON.parse(JSON.stringify(obj)))
             break
           case 1:
             obj.status = 1
+            obj.id++
             this.Articles.push(JSON.parse(JSON.stringify(obj)))
             break
           case 2:
             obj.status = 2
+            obj.id++
             this.Articles.push(JSON.parse(JSON.stringify(obj)))
             break
           case 3:
             obj.status = 3
+            obj.id++
             this.Articles.push(JSON.parse(JSON.stringify(obj)))
             break
           case 4:
             obj.status = 4
+            obj.id++
             this.Articles.push(JSON.parse(JSON.stringify(obj)))
             break
         }
@@ -224,12 +229,11 @@ export default {
           end_pubdate: this.rangedate ? this.rangedate[1] : null // null 没有下标,会报错
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         this.Articles = res.data.data.results
         this.totalCount = res.data.data.total_count
       }).catch(err => {
         console.log(err)
-        console.log(page)
       }).finally(() => {
         this.loading = false
       })
@@ -243,6 +247,20 @@ export default {
         url: '/channels'
       }).then(res => {
         this.channels = res.data.data.channels
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    onDeleteArticle (id) {
+      // console.log(id)
+      this.$axios({
+        method: 'DELETE',
+        url: `/articles/${id}`,
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('user-token')}`
+        }
+      }).then(res => {
+        console.log(res)
       }).catch(err => {
         console.log(err)
       })
@@ -267,5 +285,8 @@ img {
 }
 .pagination {
   text-align: center;
+}
+/deep/.el-date-editor .el-range-separator {
+  padding: 0 0px;
 }
 </style>

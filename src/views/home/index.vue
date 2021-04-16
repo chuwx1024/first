@@ -285,7 +285,6 @@ export default {
       }).then(res => {
         console.log(res)
         this.loadArticles(this.page)
-        console.log(1)
       }).catch(err => {
         console.log(err)
       })

@@ -20,8 +20,9 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 axios.defaults.transformResponse = [function (data) {
   try {
-    JSONbig.parse(data)
+    return JSONbig.parse(data)
   } catch (err) {
+    console.log('从这里走')
     return data
   }
 }]

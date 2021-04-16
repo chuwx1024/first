@@ -166,7 +166,8 @@ export default {
       ],
       totalCount: 100,
       loading: '',
-      channels: []
+      channels: [],
+      page: ''
     }
   },
   created () {
@@ -180,6 +181,7 @@ export default {
       this.Articles.forEach(function (value) {
         value = JSONbig.parse(JSON.stringify(value))
       })
+      // 使用的时候需要toString() 编程字符串
     },
     fakeArticles () {
       for (var i = 0; i < 10; i++) {
@@ -259,6 +261,7 @@ export default {
       })
     },
     onPageChange (page) {
+      this.page = page
       this.loadArticles(page)
     },
     onloadChannels () {
@@ -281,6 +284,8 @@ export default {
         }
       }).then(res => {
         console.log(res)
+        this.loadArticles(this.page)
+        console.log(1)
       }).catch(err => {
         console.log(err)
       })

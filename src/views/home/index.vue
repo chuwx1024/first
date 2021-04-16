@@ -109,6 +109,8 @@
 </template>
 
 <script>
+import JSONbig from 'json-bigint'
+
 export default {
   name: 'Article',
   data () {
@@ -118,16 +120,28 @@ export default {
         channel_id: null
       },
       rangedate: [],
-      Articles: [{
-        cover: {
-          images: ['https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11302429824%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620730162&t=13f8214d3399138b38704af7b2d260de'],
-          type: 1
+      Articles: [
+        {
+          cover: {
+            images: ['https://img0.baidu.com/it/u=3014059266,3321960934&fm=26&fmt=auto&gp=0.jpg'],
+            type: 1
+          },
+          id: 1195253183874596900,
+          pubdate: '2019-11-15 16:12:20',
+          status: 0,
+          title: '我是公主'
         },
-        id: 1195253183874596900,
-        pubdate: '2019-11-15 16:12:20',
-        status: 0,
-        title: '我是公主'
-      }],
+        {
+          cover: {
+            images: ['https://img0.baidu.com/it/u=3014059266,3321960934&fm=26&fmt=auto&gp=0.jpg'],
+            type: 1
+          },
+          id: 1195253183874596900,
+          pubdate: '2019-11-15 16:12:20',
+          status: 0,
+          title: '我是公主'
+        }
+      ],
       ArticlesStatus: [
         {
           tape: '',
@@ -157,10 +171,16 @@ export default {
   },
   created () {
     this.fakeArticles()
+    this.heheData()
     this.loadArticles(1)
     this.onloadChannels()
   },
   methods: {
+    heheData () {
+      this.Articles.forEach(function (value) {
+        value = JSONbig.parse(JSON.stringify(value))
+      })
+    },
     fakeArticles () {
       for (var i = 0; i < 10; i++) {
         const num = i % 5

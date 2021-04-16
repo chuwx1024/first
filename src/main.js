@@ -22,7 +22,6 @@ axios.defaults.transformResponse = [function (data) {
   try {
     return JSONbig.parse(data)
   } catch (err) {
-    console.log('从这里走')
     return data
   }
 }]

@@ -27,7 +27,10 @@ axios.defaults.transformResponse = [function (data) {
 }]
 // 配置请求拦截器
 axios.interceptors.request.use(function (config) {
-  config.headers = { Authorization: `Bearer ${window.localStorage.getItem('user-token')}` }
+  const tokan = window.localStorage.getItem('user-token')
+  if (tokan) {
+    config.headers = { Authorization: `Bearer ${tokan}` }
+  }
   return config
 })
 

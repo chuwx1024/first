@@ -75,9 +75,9 @@ export default {
       this.$axios({
         method: 'post',
         url: '/articles',
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem('user-token')}`
-        },
+        // headers: {
+        //   Authorization: `Bearer ${window.localStorage.getItem('user-token')}`
+        // },
         params: {
           draft
         },

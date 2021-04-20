@@ -25,6 +25,11 @@ axios.defaults.transformResponse = [function (data) {
     return data
   }
 }]
+// 配置请求拦截器
+axios.interceptors.request.use(function (config) {
+  config.headers = { Authorization: `Bearer ${window.localStorage.getItem('user-token')}` }
+  return config
+})
 
 new Vue({
   router,

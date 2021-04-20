@@ -25,7 +25,11 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="内容">
-        <el-input type="textarea" v-model="Pubarticle.content"></el-input>
+         <quill-editor
+          ref="myQuillEditor"
+          v-model="Pubarticle.content"
+           :options="editorOption"
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit(true)">发表</el-button>
@@ -38,8 +42,16 @@
 </template>
 
 <script>
+// 引入富文本组件样式
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
 export default {
   name: 'PublishArticle',
+  components: {
+    quillEditor
+  },
   data () {
     return {
       Pubarticle: {
@@ -51,7 +63,8 @@ export default {
         },
         channel_id: ''
       },
-      channels: []
+      channels: [],
+      editorOption: {}
     }
   },
   created () {
@@ -89,6 +102,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" csope>
+.el-form-item {
+  width: 80%;
+}
 </style>

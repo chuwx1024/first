@@ -102,8 +102,14 @@ export default {
 }
 </script>
 
-<style lang="less" csope>
+<style lang="less" scoped>
 .el-form-item {
   width: 80%;
+}
+// /deep/.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+//   margin-top: -8px;
+//   }
+/deep/.ql-toolbar.ql-snow .ql-formats {
+  line-height: 24px;
 }
 </style>

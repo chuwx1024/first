@@ -7,6 +7,7 @@
       :min="1"
       :max="10"
       :disabled="disabled"
+      @blur="onBlur"
      @input="num = $event" @change="onChangeNumber"></ButtonO>
   </div>
 </template>
@@ -26,7 +27,7 @@ export default {
       num: 1,
       min: 1,
       max: 10,
-      disabled: true
+      disabled: false
     }
   },
   computed: {},
@@ -35,6 +36,10 @@ export default {
   methods: {
     onChangeNumber (a, b) {
       console.log(a, b)
+    },
+    onBlur () {
+      this.disabled = !this.disabled
+      console.log(this.disabled)
     }
   }
 }

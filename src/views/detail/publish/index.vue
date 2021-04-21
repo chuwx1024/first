@@ -9,14 +9,15 @@
         <el-input v-model="Pubarticle.title"></el-input>
       </el-form-item>
       <el-form-item label="频道">
-        <el-select v-model="Pubarticle.channel_id" placeholder="请选择区域">
+        <!-- <el-select v-model="Pubarticle.channel_id" placeholder="请选择区域">
           <el-option
             v-for="item in channels"
             :label="item.name"
             :value="item.id"
             :key="item.id"
           ></el-option>
-        </el-select>
+        </el-select> -->
+        <ChannelSelest></ChannelSelest>
       </el-form-item>
       <el-form-item label="封面">
         <el-radio-group v-model="Pubarticle.cover">
@@ -47,10 +48,12 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
+import ChannelSelest from '@/components/channelSelest/channelSelest.vue'
 export default {
   name: 'PublishArticle',
   components: {
-    quillEditor
+    quillEditor,
+    ChannelSelest
   },
   data () {
     return {
@@ -63,12 +66,12 @@ export default {
         },
         channel_id: ''
       },
-      channels: [],
+      // channels: [],
       editorOption: {}
     }
   },
   created () {
-    this.onloadChannels()
+    // this.onloadChannels()
   },
   methods: {
     onSubmit (draft) {
@@ -87,17 +90,17 @@ export default {
       }).catch(err => {
         console.log(err, '保存失败')
       })
-    },
-    onloadChannels () {
-      this.$axios({
-        method: 'get',
-        url: '/channels'
-      }).then(res => {
-        this.channels = res.data.data.channels
-      }).catch(err => {
-        console.log(err)
-      })
     }
+    // onloadChannels () {
+    //   this.$axios({
+    //     method: 'get',
+    //     url: '/channels'
+    //   }).then(res => {
+    //     this.channels = res.data.data.channels
+    //   }).catch(err => {
+    //     console.log(err)
+    //   })
+    // }
   }
 }
 </script>

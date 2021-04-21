@@ -60,7 +60,7 @@ export default {
   created () {},
   methods: {
     onChangeNumber (data) {
-      const newdata = this.value + data
+      let newdata = this.value + data
       if (newdata < this.min) {
         newdata = this.min
       } else if (newdata > this.max) {

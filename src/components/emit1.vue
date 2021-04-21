@@ -2,7 +2,7 @@
   <div class="sbox">
     <p>子组件2</p>
     <button @click="onChangeNumber(-1)">-</button>
-    <input type="text" :value="value">
+    <input type="text" :value="value" :disabled='disabled'>
     <button @click="onChangeNumber(1)">+</button>
   </div>
 </template>
@@ -11,7 +11,7 @@
 export default {
   name: '',
   components: {},
-  props: ['value'],
+  props: ['value', 'min', 'max', 'disabled'],
   data () {
     return {
 
@@ -26,7 +26,12 @@ export default {
   created () {},
   methods: {
     onChangeNumber (data) {
-      const newdata = this.value + data
+      let newdata = this.value + data
+      if (newdata < this.min) {
+        newdata = this.min
+      } else if (newdata > this.max) {
+        newdata = this.max
+      }
       this.$emit('input', newdata)
     }
   }

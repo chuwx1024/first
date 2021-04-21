@@ -3,7 +3,11 @@
     <p>父组件</p>
     {{ num }}
     <ButtonOption :value="num" @input="num = $event"></ButtonOption>
-    <ButtonO :value="num" @input="num = $event" @change="onChangeNumber"></ButtonO>
+    <ButtonO :value="num"
+      :min="1"
+      :max="10"
+      :disabled="disabled"
+     @input="num = $event" @change="onChangeNumber"></ButtonO>
   </div>
 </template>
 
@@ -11,7 +15,7 @@
 import ButtonOption from '@/components/emit.vue'
 import ButtonO from '@/components/emit1.vue'
 export default {
-  name: '',
+  name: 'MIN',
   components: {
     ButtonOption,
     ButtonO
@@ -19,7 +23,10 @@ export default {
   props: {},
   data () {
     return {
-      num: 123
+      num: 1,
+      min: 1,
+      max: 10,
+      disabled: true
     }
   },
   computed: {},

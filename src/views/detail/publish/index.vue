@@ -79,6 +79,23 @@ export default {
   },
   methods: {
     onSubmit (draft) {
+      if (this.$route.params.Articleid) {
+        this.uploadArticleDetails(draft)
+      } else {
+        this.addArticle(draft)
+      }
+    },
+    // onloadChannels () {
+    //   this.$axios({
+    //     method: 'get',
+    //     url: '/channels'
+    //   }).then(res => {
+    //     this.channels = res.data.data.channels
+    //   }).catch(err => {
+    //     console.log(err)
+    //   })
+    // }
+    addArticle (draft) {
       this.$axios({
         method: 'post',
         url: '/articles',
@@ -95,16 +112,6 @@ export default {
         console.log(err, '保存失败')
       })
     },
-    // onloadChannels () {
-    //   this.$axios({
-    //     method: 'get',
-    //     url: '/channels'
-    //   }).then(res => {
-    //     this.channels = res.data.data.channels
-    //   }).catch(err => {
-    //     console.log(err)
-    //   })
-    // }
     loadArticleDetails () {
       const ID = this.$route.params.Articleid
       this.$axios({
@@ -113,6 +120,20 @@ export default {
       }).then(res => {
         // console.log(res)
         this.Pubarticle = res.data.data
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    uploadArticleDetails (draft) {
+      this.$axios({
+        method: 'put',
+        url: `/articles/${this.$route.params.Articleid}`,
+        params: {
+          draft
+        },
+        data: this.Pubarticle
+      }).then(res => {
+        console.log(res)
       }).catch(err => {
         console.log(err)
       })

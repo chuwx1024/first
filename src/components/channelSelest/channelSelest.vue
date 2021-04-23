@@ -1,6 +1,7 @@
 <template>
   <div class="channelSelest">
     <el-select @input="onInput"  placeholder="请选择区域" :value="value">
+      <el-option v-show="AllSelest"  label='所有频道' :value="null"></el-option>
       <el-option
         v-for="item in channels"
         :label="item.name"
@@ -13,12 +14,14 @@
 
 <script>
 export default {
-  name: '',
+  name: 'Selest',
   components: {},
   props: {
     value: {
-      type: Number,
       required: true
+    },
+    AllSelest: {
+      type: Boolean
     }
   },
   data () {

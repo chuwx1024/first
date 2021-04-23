@@ -115,4 +115,7 @@ export default {
 /deep/.ql-toolbar.ql-snow .ql-formats {
   line-height: 24px;
 }
+/deep/.ql-editor {
+  height: 200px;
+}
 </style>

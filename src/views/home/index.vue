@@ -17,14 +17,17 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="频道列表">
-            <el-select v-model="filterForm.channel_id" >
+            <!-- <el-select v-model="filterForm.channel_id" >
               <el-option  label='所有频道' :value="null"></el-option>
               <el-option
                 :label="item.name"
                 v-for="item in channels"
                 :key='item.id'
                 :value="item.id"></el-option>
-            </el-select>
+            </el-select> -->
+            <ChannelSelest
+              :AllSelest="true"
+              v-model="filterForm.channel_id"></ChannelSelest>
           </el-form-item>
           <el-form-item label="事件选择">
             <el-date-picker
@@ -110,9 +113,13 @@
 
 <script>
 import JSONbig from 'json-bigint'
+import ChannelSelest from '@/components/channelSelest/channelSelest.vue'
 
 export default {
   name: 'Article',
+  components: {
+    ChannelSelest: ChannelSelest
+  },
   data () {
     return {
       filterForm: {
@@ -167,7 +174,8 @@ export default {
       totalCount: 100,
       loading: '',
       channels: [],
-      page: ''
+      page: '',
+      AllSelest: true
     }
   },
   created () {

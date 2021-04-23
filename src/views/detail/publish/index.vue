@@ -17,7 +17,7 @@
             :key="item.id"
           ></el-option>
         </el-select> -->
-        <ChannelSelest></ChannelSelest>
+        <ChannelSelest v-model="Pubarticle.channel_id" ></ChannelSelest>
       </el-form-item>
       <el-form-item label="封面">
         <el-radio-group v-model="Pubarticle.cover">
@@ -64,7 +64,7 @@ export default {
           type: 0,
           images: ''
         },
-        channel_id: ''
+        channel_id: 10
       },
       // channels: [],
       editorOption: {}

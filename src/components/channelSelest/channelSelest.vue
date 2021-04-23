@@ -1,6 +1,6 @@
 <template>
   <div class="channelSelest">
-    <el-select  placeholder="请选择区域">
+    <el-select @input="onInput"  placeholder="请选择区域" :value="value">
       <el-option
         v-for="item in channels"
         :label="item.name"
@@ -15,7 +15,12 @@
 export default {
   name: '',
   components: {},
-  props: [],
+  props: {
+    value: {
+      type: Number,
+      required: true
+    }
+  },
   data () {
     return {
       channels: []
@@ -36,6 +41,9 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    onInput (data) {
+      this.$emit('input', data)
     }
   }
 }

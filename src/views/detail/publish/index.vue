@@ -72,6 +72,10 @@ export default {
   },
   created () {
     // this.onloadChannels()
+    const ID = this.$route.params.Articleid
+    if (ID) {
+      this.loadArticleDetails()
+    }
   },
   methods: {
     onSubmit (draft) {
@@ -90,7 +94,7 @@ export default {
       }).catch(err => {
         console.log(err, '保存失败')
       })
-    }
+    },
     // onloadChannels () {
     //   this.$axios({
     //     method: 'get',
@@ -101,6 +105,18 @@ export default {
     //     console.log(err)
     //   })
     // }
+    loadArticleDetails () {
+      const ID = this.$route.params.Articleid
+      this.$axios({
+        method: 'get',
+        url: `/articles/${ID}`
+      }).then(res => {
+        // console.log(res)
+        this.Pubarticle = res.data.data
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>

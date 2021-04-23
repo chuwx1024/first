@@ -91,7 +91,9 @@
           prop="address"
           label="操作">
           <template slot-scope="scope">
-            <el-button style="color: #409eff;marginLeft: 0" type="text">编辑</el-button>
+            <el-button
+              @click="$router.push('/publish/'+scope.row.id)"
+              style="color: #409eff;marginLeft: 0" type="text">编辑</el-button>
             <el-button
               @click='onDeleteArticle(scope.row.id)'
              type="text" style="color: #f56c6c">删除</el-button>
@@ -133,10 +135,10 @@ export default {
             images: ['https://img0.baidu.com/it/u=3014059266,3321960934&fm=26&fmt=auto&gp=0.jpg'],
             type: 1
           },
-          id: 1195253183874596900,
+          id: 1196275585827995648,
           pubdate: '2019-11-15 16:12:20',
           status: 0,
-          title: '我是公主'
+          title: '我是公主22'
         },
         {
           cover: {

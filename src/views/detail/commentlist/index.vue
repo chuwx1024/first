@@ -30,7 +30,12 @@
 export default {
   name: 'CommentList',
   components: {},
-  props: [],
+  props: {
+    articleid: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       tableData: [{

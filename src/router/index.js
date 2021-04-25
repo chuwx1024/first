@@ -51,6 +51,7 @@ const routes = [
       {
         path: '/comment/:articleid',
         name: 'CommentList',
+        props: true, // 通过prop获取参数
         component: () => import('@/views/detail/commentlist')
       }
     ]

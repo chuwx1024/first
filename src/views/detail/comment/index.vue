@@ -63,21 +63,21 @@ export default {
     return {
       articles: [
         {
-          id: 1223333333333333333332,
+          id: 12233332,
           title: '呵呵呵',
           total_comment_count: 10,
           fans_comment_count: 0,
           comment_status: false
         },
         {
-          id: 122333333333333333333332,
+          id: 122332,
           title: '呵呵呵',
           total_comment_count: 10,
           fans_comment_count: 0,
           comment_status: false
         },
         {
-          id: 12238888888888888888882,
+          id: 12238882,
           title: '呵呵呵',
           total_comment_count: 10,
           fans_comment_count: 0,

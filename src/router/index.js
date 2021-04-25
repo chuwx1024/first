@@ -47,6 +47,11 @@ const routes = [
         path: '/fans',
         name: 'Fans',
         component: () => import('@/views/fans')
+      },
+      {
+        path: '/comment/:articleid',
+        name: 'CommentList',
+        component: () => import('@/views/detail/commentlist')
       }
     ]
   },

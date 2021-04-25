@@ -14,18 +14,6 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="comment_status"
-          label="评论状态"
-          width="180">
-          <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.comment_status"
-              active-color="#409eff"
-              inactive-color="#dcdfe6">
-            </el-switch>
-          </template>
-        </el-table-column>
-        <el-table-column
           prop="total_comment_count"
           label="总评论数">
         </el-table-column>
@@ -34,55 +22,62 @@
           label="粉丝总评论数">
         </el-table-column>
         <el-table-column
+          prop="comment_status"
+          label="评论状态"
+          width="180">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.comment_status"
+              active-color="#409eff"
+              @change="onStatusChange(scope.row)"
+              inactive-color="#dcdfe6">
+            </el-switch>
+          </template>
+        </el-table-column>
+        <el-table-column
           label="操作">
-          <template >
-            <el-button type="text">修改</el-button>
+          <template  slot-scope="scope">
+            <el-button
+            @click="$router.push(`/comment/${scope.row.id}`)"
+            type="text">修改</el-button>
           </template>
         </el-table-column>
       </el-table>
+      <div class="pagination">
+        <el-pagination
+          layout="prev, pager, next"
+          :total="1000"
+          @current-change="onChangePage"
+          >
+        </el-pagination>
+      </div>
     </el-card>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Comment',
   data () {
     return {
-      // tableData: [{
-      //   date: '2016-05-02',
-      //   name: '王小虎',
-      //   address: '上海市普陀区金沙江路 1518 弄'
-      // }, {
-      //   date: '2016-05-04',
-      //   name: '王小虎',
-      //   address: '上海市普陀区金沙江路 1517 弄'
-      // }, {
-      //   date: '2016-05-01',
-      //   name: '王小虎',
-      //   address: '上海市普陀区金沙江路 1519 弄'
-      // }, {
-      //   date: '2016-05-03',
-      //   name: '王小虎',
-      //   address: '上海市普陀区金沙江路 1516 弄'
-      // }],
       articles: [
         {
-          id: 12232,
+          id: 1223333333333333333332,
           title: '呵呵呵',
           total_comment_count: 10,
           fans_comment_count: 0,
           comment_status: false
         },
         {
-          id: 12232,
+          id: 122333333333333333333332,
           title: '呵呵呵',
           total_comment_count: 10,
           fans_comment_count: 0,
           comment_status: false
         },
         {
-          id: 12232,
+          id: 12238888888888888888882,
           title: '呵呵呵',
           total_comment_count: 10,
           fans_comment_count: 0,
@@ -110,11 +105,36 @@ export default {
           type: 'warning'
         })
       })
+    },
+    onStatusChange (article) {
+      this.$axios({
+        method: 'put',
+        url: '/comments/status',
+        params: {
+          article_id: article.id.toString()
+        },
+        data: {
+          allow_comment: article.comment_status
+        }
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        this.$message({
+          message: err,
+          type: 'error'
+        })
+      })
+    },
+    onChangePage (page) {
+      console.log(page)
+      // 页码改变重新发请求,请求数据
     }
   }
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+  .el-pagination {
+    margin-top: 20px
+  }
 </style>

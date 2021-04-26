@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 export default {
   name: 'CommentList',
   components: {},
@@ -85,11 +85,11 @@ export default {
   },
   computed: {},
   watch: {},
-  filters: {
-    formatDate (date) {
-      return moment(date).format('YYYY-DD-MM')
-    }
-  },
+  // filters: {
+  //   formatDate (date) {
+  //     return moment(date).format('YYYY-DD-MM')
+  //   }
+  // },
   created () {
     this.loadComments()
     // this.fakeData()
@@ -106,7 +106,7 @@ export default {
       }).then(res => {
         const comment = res.data.data.results
         comment.forEach(function (item) {
-          item.pubdate = moment(item.pubdate).format('MM DD YYYY, h:mm:ss')
+          // item.pubdate = moment(item.pubdate).format('MM DD YYYY, h:mm:ss')
         })
         console.log(res)
         // this.comment = comment

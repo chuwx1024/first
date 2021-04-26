@@ -12,12 +12,16 @@ import axios from 'axios'
 import 'nprogress/nprogress.css'
 // import bigint
 // import JSONbig from 'json-bigint'
+import moment from 'moment'
 
 // 全局注册
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.filter('formatDate', date => {
+  return moment(date).format('YYYY-DD-MM')
+})
 // axios.defaults.transformResponse = [function (data) {
 //   try {
 //     // return JSONbig.parse(data)

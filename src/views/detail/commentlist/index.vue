@@ -37,6 +37,14 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="是否推荐">
+          <template slot-scope="scope">
+            <el-button
+              @click="ChangeRecommend(scope.row)"
+              type="text">{{ scope.row.is_top === 1 ? '取消推荐' : '推荐' }}</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="reply_count"
           label="回复数量">
         </el-table-column>
@@ -68,7 +76,8 @@ export default {
           is_top: 0,
           like_count: 1,
           pubdate: '2019-11-18T17:11:08',
-          reply_count: 3
+          reply_count: 3,
+          com_id: 123
         },
         {
           aut_id: 2,
@@ -76,10 +85,11 @@ export default {
           aut_photo: 'https://img0.baidu.com/it/u=1101060091,1073424182&fm=26&fmt=auto&gp=0.jpg',
           content: 'c',
           is_liking: 0,
-          is_top: 0,
+          is_top: 1,
           like_count: 6,
           pubdate: '2019-03-19T17:11:08',
-          reply_count: 5
+          reply_count: 5,
+          com_id: 456
         }
       ]
     }
@@ -111,6 +121,27 @@ export default {
         })
         console.log(res)
         // this.comment = comment
+      }).catch(err => {
+        this.$message({
+          type: 'error',
+          message: err
+        })
+      })
+    },
+    ChangeRecommend (data) {
+      if (data.is_top) {
+        data.is_top = 0
+      } else {
+        data.is_top = 1
+      }
+      this.$axios({
+        method: 'put',
+        url: `/comments/${data.com_id}/sticky`,
+        data: {
+          sticky: data.is_top
+        }
+      }).then(res => {
+        console.log(res)
       }).catch(err => {
         this.$message({
           type: 'error',

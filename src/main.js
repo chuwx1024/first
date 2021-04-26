@@ -19,8 +19,11 @@ Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-Vue.filter('formatDate', date => {
-  return moment(date).format('YYYY-DD-MM')
+// Vue.filter('formatDate', date => {
+//   return moment(date).format('YYYY-DD-MM')
+// })
+Vue.filter('formatDate', (date, format = 'YYYY-DD-MM') => {
+  return moment(date).format(format)
 })
 // axios.defaults.transformResponse = [function (data) {
 //   try {

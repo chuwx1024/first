@@ -32,7 +32,8 @@
         <el-table-column
           label="评论日期">
           <template slot-scope="scope">
-            {{ scope.row.pubdate | formatDate }}
+            <!-- 第一个始终弄是第一个参数,之后的参数写在函数名后面 -->
+            {{ scope.row.pubdate | formatDate('YYYY-DD-MM HH:MM:SS') }}
           </template>
         </el-table-column>
         <el-table-column

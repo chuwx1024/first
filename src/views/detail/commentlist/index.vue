@@ -30,8 +30,10 @@
           label="点赞数量">
         </el-table-column>
         <el-table-column
-          prop="pubdate"
           label="评论日期">
+          <template slot-scope="scope">
+            {{ scope.row.pubdate | formatDate }}
+          </template>
         </el-table-column>
         <el-table-column
           prop="reply_count"
@@ -83,9 +85,14 @@ export default {
   },
   computed: {},
   watch: {},
+  filters: {
+    formatDate (date) {
+      return moment(date).format('YYYY-DD-MM')
+    }
+  },
   created () {
     this.loadComments()
-    this.fakeData()
+    // this.fakeData()
   },
   methods: {
     loadComments () {
@@ -109,12 +116,12 @@ export default {
           message: err
         })
       })
-    },
-    fakeData () {
-      this.comment.forEach(function (item) {
-        item.pubdate = moment(item.pubdate).format('YYYY-DD-MM HH:mm:ss')
-      })
     }
+    // fakeData () {
+    //   this.comment.forEach(function (item) {
+    //     item.pubdate = moment(item.pubdate).format('YYYY-DD-MM HH:mm:ss')
+    //   })
+    // }
   }
 }
 

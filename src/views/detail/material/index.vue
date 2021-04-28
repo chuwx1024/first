@@ -8,17 +8,18 @@
         <el-col
           v-for="item in images"
           :key="item.id"
-          :xs='24' :sm="12" :md="8" :lg="6">
+          :xs='12' :sm="8" :md="6" :lg="4">
           <div class="grid-content bg-purple">
             <el-card
               :body-style="{ padding: '0px' }">
               <img :src="item.url" class="image">
-              <div style="padding: 14px;">
-                <span>好吃的汉堡</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <el-button type="text" class="button">操作按钮</el-button>
-                </div>
+              <div style="padding: 14px;" class="bottomS">
+                  <!-- <i :class="item.is_collected ? 'el-icon-star-on' : 'el-icon-star-off' "></i> -->
+                  <i :class='{
+                    "el-icon-star-on": item.is_collected,
+                    "el-icon-star-off": !item.is_collected,
+                    }'></i>
+                  <i class="el-icon-delete"></i>
               </div>
             </el-card>
           </div>
@@ -37,7 +38,7 @@ export default {
         {
           id: 1,
           url: 'https://img0.baidu.com/it/u=2596200191,2777645264&fm=26&fmt=auto&gp=0.jpg',
-          is_collected: true
+          is_collected: false
         },
         {
           id: 2,
@@ -52,10 +53,30 @@ export default {
         {
           id: 4,
           url: 'https://img0.baidu.com/it/u=2596200191,2777645264&fm=26&fmt=auto&gp=0.jpg',
-          is_collected: true
+          is_collected: false
         },
         {
           id: 5,
+          url: 'https://img0.baidu.com/it/u=2102076840,2356347403&fm=26&fmt=auto&gp=0.jpg',
+          is_collected: true
+        },
+        {
+          id: 6,
+          url: 'https://img0.baidu.com/it/u=2102076840,2356347403&fm=26&fmt=auto&gp=0.jpg',
+          is_collected: true
+        },
+        {
+          id: 7,
+          url: 'https://img0.baidu.com/it/u=2102076840,2356347403&fm=26&fmt=auto&gp=0.jpg',
+          is_collected: false
+        },
+        {
+          id: 8,
+          url: 'https://img0.baidu.com/it/u=2102076840,2356347403&fm=26&fmt=auto&gp=0.jpg',
+          is_collected: true
+        },
+        {
+          id: 9,
           url: 'https://img0.baidu.com/it/u=2102076840,2356347403&fm=26&fmt=auto&gp=0.jpg',
           is_collected: true
         }
@@ -88,7 +109,7 @@ export default {
 
 <style lang="less" scoped>
   img {
-    height: 220px;
+    height: 140px;
   }
   /deep/.el-card__body {
     text-align: center;
@@ -96,4 +117,15 @@ export default {
   .el-card.is-always-shadow {
     margin-bottom: 20px;
   }
+  .bottomS {
+    display: flex;
+    justify-content: space-between;
+    i {
+      font-size: 22px;
+    }
+    .el-icon-star-on {
+      color: orchid;
+    }
+  }
+
 </style>

@@ -109,11 +109,12 @@ export default {
       })
     },
     onFind (value) {
-      if (value === '收藏') {
-        this.loadImages(true)
-      } else {
-        this.loadImages()
-      }
+      // if (value === '收藏') {
+      //   this.loadImages(true)
+      // } else {
+      //   this.loadImages()
+      // }
+      this.loadImages(value === '收藏')
     }
 
   }

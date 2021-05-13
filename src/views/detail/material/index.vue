@@ -4,6 +4,12 @@
       <div slot="header" class="clearfix">
         <span>素材管理</span>
       </div>
+      <div class="selectAll">
+        <el-radio-group v-model="type" @change='onFind'>
+          <el-radio-button label="全部"></el-radio-button>
+          <el-radio-button label="收藏"></el-radio-button>
+      </el-radio-group>
+      </div>
       <el-row :gutter="20">
         <el-col
           v-for="item in images"
@@ -80,19 +86,20 @@ export default {
           url: 'https://img0.baidu.com/it/u=2102076840,2356347403&fm=26&fmt=auto&gp=0.jpg',
           is_collected: true
         }
-      ]
+      ],
+      type: '全部'
     }
   },
   created () {
     this.loadImages()
   },
   methods: {
-    loadImages () {
+    loadImages (iscollect = false) {
       this.$axios({
         method: 'get',
         url: '/user/images',
         params: {
-          collect: false
+          collect: iscollect // 是否获取收藏图片
         }
       }).then(res => {
         console.log(res)
@@ -100,6 +107,13 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    onFind (value) {
+      if (value === '收藏') {
+        this.loadImages(true)
+      } else {
+        this.loadImages()
+      }
     }
 
   }
@@ -119,13 +133,17 @@ export default {
   }
   .bottomS {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     i {
       font-size: 22px;
     }
     .el-icon-star-on {
       color: orchid;
     }
+  }
+  .selectAll {
+    text-align: left;
+    margin-bottom: 20px;
   }
 
 </style>

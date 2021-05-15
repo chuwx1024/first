@@ -28,7 +28,7 @@
                     @click="onCollect(item)"
                     ></i>
                   <i
-                    @click="onDelete"
+                    @click="onDelete(item)"
                     class="el-icon-delete"></i>
               </div>
             </el-card>
@@ -132,13 +132,24 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+      item.is_collected = !item.is_collected
     },
-    onDelete () {
-      console.log('1')
+    onDelete (item) {
+      this.$axios({
+        method: 'DELETE',
+        url: `/user/images/${item.id}`
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+      // 删除
+      const index = this.images.findIndex(function (i) {
+        return i.id === item.id
+      })
+      this.images.splice(index, 1)
     }
-
   }
-
 }
 </script>
 

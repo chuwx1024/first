@@ -135,19 +135,34 @@ export default {
       item.is_collected = !item.is_collected
     },
     onDelete (item) {
-      this.$axios({
-        method: 'DELETE',
-        url: `/user/images/${item.id}`
-      }).then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.log(err)
+      this.$confirm('是否要删除这张图片?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$axios({
+          method: 'DELETE',
+          url: `/user/images/${item.id}`
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+        // 删除
+        const index = this.images.findIndex(function (i) {
+          return i.id === item.id
+        })
+        this.images.splice(index, 1)
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
-      // 删除
-      const index = this.images.findIndex(function (i) {
-        return i.id === item.id
-      })
-      this.images.splice(index, 1)
     }
   }
 }

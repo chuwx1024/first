@@ -3,17 +3,20 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>素材管理</span>
+        <input  @change="ChangeImage"  type="file" ref="files" hidden>
+         <el-button
+            type="success"
+            @click="UploadImage"
+          >手动上传文件</el-button>
         <el-upload
           style="float: right;padding: 3px 0;margin-top: -8px;"
           class="upload-demo"
-          action="https://ttapi.research.itcast.cn/mp/v1_0/user/images"
+          action="http://ttapi.research.itcast.cn/mp/v1_0/user/images"
           :headers="uploadHeaders"
           name="image"
           :on-success="onsucess"
           :on-error='onerror'
           >
-          <el-button
-            type="success">成功按钮</el-button>
           <el-button size="small" type="primary">点击上传</el-button>
         </el-upload>
       </div>
@@ -186,6 +189,26 @@ export default {
     },
     onerror (err) {
       console.log(err)
+    },
+    onUploadImage () {
+      console.log('2222')
+    },
+    UploadImage () {
+      this.$refs.files.click()
+    },
+    ChangeImage () {
+      const fileobj = this.$refs.files.files[0]
+      this.$axios({
+        method: 'POST',
+        url: '/user/images',
+        data: {
+          image: fileobj
+        }
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }

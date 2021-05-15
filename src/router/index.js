@@ -53,6 +53,11 @@ const routes = [
         name: 'CommentList',
         props: true, // 通过prop获取参数
         component: () => import('@/views/detail/commentlist')
+      },
+      {
+        path: '/accont',
+        name: 'Accont',
+        component: () => import('@/views/accont')
       }
     ]
   },

@@ -198,12 +198,12 @@ export default {
     },
     ChangeImage () {
       const fileobj = this.$refs.files.files[0]
+      const formData = new FormData()
+      formData.append('image', fileobj)
       this.$axios({
         method: 'POST',
         url: '/user/images',
-        data: {
-          image: fileobj
-        }
+        data: formData // multipart/form-data 常用语文件上传 application/json 默认设置
       }).then(res => {
         console.log(res)
       }).catch(err => {

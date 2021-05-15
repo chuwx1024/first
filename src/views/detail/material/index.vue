@@ -3,6 +3,19 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>素材管理</span>
+        <el-upload
+          style="float: right;padding: 3px 0;margin-top: -8px;"
+          class="upload-demo"
+          action="https://ttapi.research.itcast.cn/mp/v1_0/user/images"
+          :headers="uploadHeaders"
+          name="image"
+          :on-success="onsucess"
+          :on-error='onerror'
+          >
+          <el-button
+            type="success">成功按钮</el-button>
+          <el-button size="small" type="primary">点击上传</el-button>
+        </el-upload>
       </div>
       <div class="selectAll">
         <el-radio-group v-model="type" @change='onFind'>
@@ -41,6 +54,7 @@
 </template>
 
 <script>
+const token = window.localStorage.getItem('user-token')
 export default {
   data () {
     return {
@@ -91,7 +105,10 @@ export default {
           is_collected: true
         }
       ],
-      type: '全部'
+      type: '全部',
+      uploadHeaders: {
+        Authorization: `Bearer ${token}`
+      }
     }
   },
   created () {
@@ -163,6 +180,12 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    onsucess (res) {
+      console.log(res)
+    },
+    onerror (err) {
+      console.log(err)
     }
   }
 }

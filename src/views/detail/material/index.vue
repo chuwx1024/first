@@ -24,8 +24,12 @@
                   <i :class='{
                     "el-icon-star-on": item.is_collected,
                     "el-icon-star-off": !item.is_collected,
-                    }'></i>
-                  <i class="el-icon-delete"></i>
+                    }'
+                    @click="onCollect(item)"
+                    ></i>
+                  <i
+                    @click="onDelete"
+                    class="el-icon-delete"></i>
               </div>
             </el-card>
           </div>
@@ -115,6 +119,22 @@ export default {
       //   this.loadImages()
       // }
       this.loadImages(value === '收藏')
+    },
+    onCollect (item) {
+      this.$axios({
+        method: 'PUT',
+        url: `/user/images/${item.id}`,
+        data: {
+          collect: !item.is_collected
+        }
+      }).then(res => {
+        console.log(res)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    onDelete () {
+      console.log('1')
     }
 
   }

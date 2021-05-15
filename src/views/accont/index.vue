@@ -2,9 +2,15 @@
   <div class="accont">
     <el-form ref="form" :model="user" label-width="80px">
       <el-form-item label="用户头像">
-        <div class="image">
+        <!-- <div class="image">
           <img width="200px"  :src="user.photo">
-        </div>
+        </div> -->
+          <el-upload
+            class="avatar-uploader"
+            :http-request="HeadImage"
+            >
+          <img  :src="user.photo" class="avatar">
+        </el-upload>
       </el-form-item>
       <el-form-item label="用户昵称">
         <el-input v-model="user.name"></el-input>
@@ -14,6 +20,9 @@
       </el-form-item>
       <el-form-item label="个人邮箱">
         <el-input v-model="user.email"></el-input>
+      </el-form-item>
+      <el-form-item label="手机号">
+        <el-input disabled v-model="user.mobile"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">保存修改</el-button>
@@ -70,6 +79,20 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    HeadImage (config) {
+      console.log(config)
+      const file = new FormData()
+      file.append('photo', config.file)
+      this.$axios({
+        method: 'PATCH',
+        url: '/user/photo',
+        data: file
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }
@@ -84,6 +107,16 @@ export default {
   overflow: hidden;
   img {
     height: 100%;
+  }
+}
+/deep/.el-upload {
+  width: 200px;
+  height: 200px;
+  border: 1px dotted purple;
+  line-height: 200px;
+  overflow: hidden;
+  img {
+    width: 100%;
   }
 }
 </style>

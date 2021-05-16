@@ -6,8 +6,10 @@
           <img width="200px"  :src="user.photo">
         </div> -->
           <el-upload
+            action="http://ttapi.research.itcast.cn/mp/v1_0/user/photo"
             class="avatar-uploader"
             :http-request="HeadImage"
+            :show-file-list="false"
             >
           <img  :src="user.photo" class="avatar">
         </el-upload>

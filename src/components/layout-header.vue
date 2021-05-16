@@ -9,8 +9,8 @@
      <!-- right -->
         <el-dropdown trigger='click'>
           <div class="dropdown-con">
-            <img src="../assets/img/avatar.jpg" alt="">
-            <span class="el-dropdown-link">水若寒与</span>
+            <img :src="user.photo" alt="">
+            <span class="el-dropdown-link">{{ user.name }}</span>
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>账户信息</el-dropdown-item>
@@ -24,6 +24,17 @@
 
 <script>
 export default {
+  data () {
+    return {
+      user: {
+        name: '呵呵呵',
+        photo: 'https://img2.baidu.com/it/u=3144296246,804426693&fm=26&fmt=auto&gp=0.jpg'
+      }
+    }
+  },
+  created () {
+    this.loadUser()
+  },
   methods: {
     onLoginOut () {
       this.$confirm('确定要退出?', '提醒', {
@@ -42,6 +53,16 @@ export default {
           type: 'info',
           message: '已取消删除'
         })
+      })
+    },
+    loadUser () {
+      this.$axios({
+        method: 'GET',
+        url: '/user/profile'
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
       })
     }
   }
@@ -65,6 +86,7 @@ export default {
     align-items: center;
     img {
       height: 40px;
+      width: 40px;
       border-radius: 20px;
       margin-right: 8px;
     }

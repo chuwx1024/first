@@ -35,7 +35,7 @@ export default {
   },
   created () {
     this.loadUser()
-    EventBus.on('update-user', (user) => {
+    EventBus.$on('update-user', (user) => {
       this.user.name = user.name
       this.user.photo = user.photo
     })

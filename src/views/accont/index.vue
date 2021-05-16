@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import EventBus from '@/utils/eventBus'
 export default {
   name: '',
   components: {},
@@ -78,7 +79,7 @@ export default {
         }
       }).then(res => {
         console.log(res)
-        this.$emit('update-user', this.user)
+        EventBus.$emit('update-user', this.user)
       }).catch(err => {
         console.log(err)
       })
